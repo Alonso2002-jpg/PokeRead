@@ -181,7 +181,7 @@ public class PokemonController {
     public Optional<Pokemon> getPokeMaxWeight(){
         OptionalDouble max = obtenerPokemons()
                 .stream()
-                .mapToDouble(pk -> pk.parseWeight())
+                .mapToDouble(Pokemon::parseWeight)
                 .max();
 
         Optional<Pokemon> pokeMaxWeight = obtenerPokemons()
@@ -199,7 +199,7 @@ public class PokemonController {
     public Optional<Pokemon> getPokeMaxHeight(){
         OptionalDouble max = obtenerPokemons()
                 .stream()
-                .mapToDouble(pk -> pk.parseHeight())
+                .mapToDouble(Pokemon::parseHeight)
                 .max();
 
         Optional<Pokemon> pokeMaxHeight = obtenerPokemons()
@@ -238,7 +238,7 @@ public class PokemonController {
     public double getAverageWeight(){
         var averageWeight = obtenerPokemons()
                 .stream()
-                .mapToDouble(pk -> pk.parseWeight());
+                .mapToDouble(Pokemon::parseWeight);
 
         return getAverage(averageWeight);
     }
@@ -256,6 +256,7 @@ public class PokemonController {
                 .stream()
                 .filter(pk -> pk.getNext_evolution()!=null)
                 .mapToDouble(pk -> pk.getNext_evolution().size());
+        System.out.println(averageEvolutions);
 
         return getAverage(averageEvolutions);
     }
@@ -272,9 +273,9 @@ public class PokemonController {
     public Map<String, Long> getGroupType(){
         Map<String, Long> pokeTypes = obtenerPokemons()
                 .stream()
-                .map(pk -> pk.getType())
+                .map(Pokemon::getType)
                 .flatMap(ArrayList::stream)
-                        .collect(Collectors.groupingBy(tp -> tp, Collectors.counting()));
+                        .collect(Collectors.groupingBy(tp -> tp,Collectors.counting()));
         return pokeTypes;
     }
 
@@ -305,7 +306,7 @@ public class PokemonController {
         String commonWeak = getGroupType()
                 .entrySet()
                 .stream()
-                .max(Comparator.comparingInt(m -> Long.valueOf(m.getValue()).intValue()))
+                .max(Comparator.comparingInt(m -> m.getValue().intValue()))
                 .get()
                 .getKey();
 
@@ -313,20 +314,7 @@ public class PokemonController {
     }
     public static void main(String[] args) {
         var poke = PokemonController.getInstance();
-        ArrayList<List<Integer>> lista = new ArrayList<>();
-        lista.add(Arrays.asList(1,2,3));
-        lista.add(Arrays.asList(4,5,6));
-        lista.add(Arrays.asList(7,8,9));
-
-        lista.forEach(System.out::println);
-
-        var nuevaLista = lista.stream()
-                .findAny()
-                .stream()
-                .flatMap( nu -> nu.stream())
-                        .toList();
-
-        System.out.println(nuevaLista);
+        poke.getGroupType().forEach((k,v) -> System.out.println(k + " : " + v));
 
 
     }
