@@ -32,11 +32,16 @@ public class PokemonController {
         }
         return instance;
     }
+
+    public static void closeInstance() {
+        instance=null;
+    }
     public void cargarPokedex() {
-       Path rutaRelativa = Paths.get("");
+        Path rutaRelativa = Paths.get("");
         String rutaAbsoluta = rutaRelativa.toAbsolutePath().toString();
         String rutaData = rutaAbsoluta + File.separator + "data";
         String rutaPokemon = rutaData + File.separator + "pokemon.json";
+
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         // Actualizar a try-with-resources
@@ -181,7 +186,7 @@ public class PokemonController {
     public Optional<Pokemon> getPokeMaxWeight(){
         OptionalDouble max = obtenerPokemons()
                 .stream()
-                .mapToDouble(pk -> pk.parseWeight())
+                .mapToDouble(Pokemon::parseWeight)
                 .max();
 
         Optional<Pokemon> pokeMaxWeight = obtenerPokemons()
@@ -199,7 +204,7 @@ public class PokemonController {
     public Optional<Pokemon> getPokeMaxHeight(){
         OptionalDouble max = obtenerPokemons()
                 .stream()
-                .mapToDouble(pk -> pk.parseHeight())
+                .mapToDouble(Pokemon::parseHeight)
                 .max();
 
         Optional<Pokemon> pokeMaxHeight = obtenerPokemons()
@@ -238,7 +243,7 @@ public class PokemonController {
     public double getAverageWeight(){
         var averageWeight = obtenerPokemons()
                 .stream()
-                .mapToDouble(pk -> pk.parseWeight());
+                .mapToDouble(Pokemon::parseWeight);
 
         return getAverage(averageWeight);
     }
@@ -246,7 +251,7 @@ public class PokemonController {
     public double getAverageHeight(){
         var averageHeight = obtenerPokemons()
                 .stream()
-                .mapToDouble(pk -> pk.parseHeight());
+                .mapToDouble(Pokemon::parseHeight);
 
         return getAverage(averageHeight);
     }
@@ -256,6 +261,7 @@ public class PokemonController {
                 .stream()
                 .filter(pk -> pk.getNext_evolution()!=null)
                 .mapToDouble(pk -> pk.getNext_evolution().size());
+        System.out.println(averageEvolutions);
 
         return getAverage(averageEvolutions);
     }
@@ -269,64 +275,51 @@ public class PokemonController {
         return getAverage(averageWeaks);
     }
 
-    public Map<String, Long> getGroupType(){
-        Map<String, Long> pokeTypes = obtenerPokemons()
+    public Map<String, List<Pokemon>> getGroupType(){
+
+
+        return obtenerPokemons()
                 .stream()
-                .map(pk -> pk.getType())
-                .flatMap(ArrayList::stream)
-                        .collect(Collectors.groupingBy(tp -> tp, Collectors.counting()));
-        return pokeTypes;
+                .flatMap(pk-> pk.getType().stream())
+                .distinct()
+                .collect(Collectors
+                        .toMap(type -> type,
+                                type -> obtenerPokemons().stream().filter(pk -> pk.getType().contains(type))
+                                        .toList()));
     }
 
     public Map<String, Long> getGroupWeak(){
-        Map<String, Long> pokeWeak = obtenerPokemons()
+        return obtenerPokemons()
                 .stream()
-                .map(pk -> pk.getWeaknesses())
+                .map(Pokemon::getWeaknesses)
                 .flatMap(ArrayList::stream)
                 .collect(Collectors.groupingBy(pw -> pw, Collectors.counting()));
-        return pokeWeak;
     }
 
     public Map<Integer, Long> getPokeXNumEvo(){
-        Map<Integer, Long> pokesxEvo = obtenerPokemons()
+
+
+        return obtenerPokemons()
                 .stream()
                 .filter(pk -> pk.getNext_evolution() != null)
                 .collect(Collectors.groupingBy(pk -> pk.getNext_evolution().size(),Collectors.counting()))
                 .entrySet()
                 .stream()
                 .collect( Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-
-        return pokesxEvo;
     }
 
     public String getMostCommonWeak(){
 
-        String commonWeak = getGroupType()
+        return getGroupWeak()
                 .entrySet()
                 .stream()
-                .max(Comparator.comparingInt(m -> Long.valueOf(m.getValue()).intValue()))
+                .max(Comparator.comparingInt(m -> m.getValue().intValue()))
                 .get()
                 .getKey();
-
-        return commonWeak;
     }
     public static void main(String[] args) {
         var poke = PokemonController.getInstance();
-        ArrayList<List<Integer>> lista = new ArrayList<>();
-        lista.add(Arrays.asList(1,2,3));
-        lista.add(Arrays.asList(4,5,6));
-        lista.add(Arrays.asList(7,8,9));
-
-        lista.forEach(System.out::println);
-
-        var nuevaLista = lista.stream()
-                .findAny()
-                .stream()
-                .flatMap( nu -> nu.stream())
-                        .toList();
-
-        System.out.println(nuevaLista);
+        poke.getGroupType().forEach((k,v) -> System.out.println(k + " : " + v));
 
 
     }

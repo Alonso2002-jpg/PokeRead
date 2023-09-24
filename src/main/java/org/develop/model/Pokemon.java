@@ -9,9 +9,9 @@ import java.util.ArrayList;
 @Data
 
 public class Pokemon{
+
     private int id;
     private String num;
-    @Getter @Setter
     private String name;
     private String img;
     private ArrayList<String> type;
