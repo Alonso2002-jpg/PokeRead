@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import org.develop.controllers.PokemonController;
 import org.develop.model.NextEvolution;
 import org.develop.model.Pokemon;
+import org.develop.services.DatabaseManager;
 
 import java.io.File;
 import java.nio.file.Files;
@@ -17,6 +18,8 @@ public class Main {
 
     public static void main(String[] args) {
        PokemonController pokemonController = PokemonController.getInstance();
+        DatabaseManager dbManager = DatabaseManager.getInstance();
+
        //Pokemon pokemon=pokemonController.getPokemonXId(25);
        //List<String> primerosDiez = pokemonController.obtenerNom10Primeros();
 
@@ -49,8 +52,8 @@ public class Main {
         //Pokemon pokeMinEvo = pokemonController.minEvoPokemon().get();
         //System.out.println(pokeMinEvo);
 
-        Pokemon pokeType = pokemonController.getPokeNotEvoType("Fire").get();
-        System.out.println(pokeType);
+        //Pokemon pokeType = pokemonController.getPokeNotEvoType("Fire").get();
+        //System.out.println(pokeType);
 
         //Pokemon evo = pokemonController.getEvolution(pokeType.getName()).get();
         //System.out.println(evo);

@@ -16,6 +16,11 @@ dependencies {
     implementation("com.google.code.gson:gson:2.10.1")
     // https://mvnrepository.com/artifact/org.projectlombok/lombok
     implementation("org.projectlombok:lombok:1.18.30")
+    // https://mvnrepository.com/artifact/org.xerial/sqlite-jdbc
+    implementation("org.xerial:sqlite-jdbc:3.43.0.0")
+
+        // Ibatis lo usaremos para leer los scripts SQL desde archivos
+    implementation("org.mybatis:mybatis:3.5.13")
 }
 
 tasks.test {
