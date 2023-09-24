@@ -32,11 +32,16 @@ public class PokemonController {
         }
         return instance;
     }
+
+    public static void closeInstance() {
+        instance=null;
+    }
     public void cargarPokedex() {
-       Path rutaRelativa = Paths.get("");
+        Path rutaRelativa = Paths.get("");
         String rutaAbsoluta = rutaRelativa.toAbsolutePath().toString();
         String rutaData = rutaAbsoluta + File.separator + "data";
         String rutaPokemon = rutaData + File.separator + "pokemon.json";
+
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
         // Actualizar a try-with-resources

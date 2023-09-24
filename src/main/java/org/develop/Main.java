@@ -2,6 +2,7 @@ package org.develop;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import org.develop.controllers.PokeWriteCSV;
 import org.develop.controllers.PokemonController;
 import org.develop.model.NextEvolution;
 import org.develop.model.Pokemon;
@@ -19,7 +20,8 @@ public class Main {
     public static void main(String[] args) {
        PokemonController pokemonController = PokemonController.getInstance();
         DatabaseManager dbManager = DatabaseManager.getInstance();
-
+        PokeWriteCSV writeCSV = new PokeWriteCSV();
+        writeCSV.escribirCSV(pokemonController);
        //Pokemon pokemon=pokemonController.getPokemonXId(25);
        //List<String> primerosDiez = pokemonController.obtenerNom10Primeros();
 
