@@ -3,8 +3,11 @@ package org.develop.controllers;
 import com.opencsv.CSVWriter;
 import org.develop.model.Pokemon;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
 
@@ -32,18 +35,15 @@ public class PokeWriteCSV {
         }
     }
 
-    public static void main(String[] args) {
-        // Supongamos que tienes una lista de Pokémon llamada 'pokedex'
-        PokemonController pokedex = PokemonController.getInstance(); // Debes proporcionar tu propia implementación de obtenerPokedex()
-        Properties properties = new Properties();
-        String dataUrl = properties.getProperty("data.url","pokedex.csv");
-        // Ruta del archivo CSV donde deseas guardar la pokedex
-
-        // Crear un objeto de PokemonCSVWriter y guardar la pokedex en el archivo CSV
+    public void escribirCSV(PokemonController pkController){
+        Path rutaRelativa = Paths.get("");
+        String rutaAbsoluta = rutaRelativa.toAbsolutePath().toString();
+        String rutaData = rutaAbsoluta + File.separator + "data";
+        String rutaEscritura = rutaData +File.separator + "pokedex.csv";
         PokeWriteCSV csvWriter = new PokeWriteCSV();
-        csvWriter.writePokedexToCSV(pokedex.obtenerPokemons(), dataUrl);
+        csvWriter.writePokedexToCSV(pkController.obtenerPokemons(), rutaEscritura);
 
-        System.out.println("Pokedex guardada en " + dataUrl);
+        System.out.println("Pokedex guardada en " + rutaEscritura);
     }
 
 }
