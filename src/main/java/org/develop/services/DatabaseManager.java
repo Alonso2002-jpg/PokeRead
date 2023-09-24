@@ -1,5 +1,6 @@
 package org.develop.services;
 
+
 import org.apache.ibatis.jdbc.ScriptRunner;
 
 import javax.xml.crypto.Data;
@@ -28,7 +29,7 @@ public class DatabaseManager {
             openConnection();
             System.out.println("Successfully");
         }catch (SQLException e) {
-                e.printStackTrace();
+            e.printStackTrace();
         }
     }
 
