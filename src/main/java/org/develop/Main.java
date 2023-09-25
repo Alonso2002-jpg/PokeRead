@@ -23,7 +23,7 @@ public class Main {
         PokeWriteCSV writeCSV = new PokeWriteCSV();
         writeCSV.escribirCSV(pokemonController);
        //Pokemon pokemon=pokemonController.getPokemonXId(25);
-       //List<String> primerosDiez = pokemonController.obtenerNom10Primeros();
+       //List<String> primerosDiez = pokemonController.obtenerNom10Primeros();git
 
        //primerosDiez.forEach(System.out::println);
 
