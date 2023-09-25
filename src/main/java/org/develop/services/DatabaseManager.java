@@ -13,23 +13,27 @@ import java.util.Properties;
 
 public class DatabaseManager {
     private static DatabaseManager instance;
-    Connection connection;
+    private Connection connection;
     private PreparedStatement preparedStatement;
     private String serverUrl;
-    private String serverPort;
     private String dataBaseName;
-
+    private boolean chargeTables;
     private String conURL;
-    private String jdbcDriver;
+    private String initScript;
 
 
     private DatabaseManager(){
         try {
             configFromProperties();
             openConnection();
+            if (chargeTables){
+                executeScript(initScript,true);
+            }
             System.out.println("Successfully");
-        }catch (SQLException e) {
+        }catch (SQLException | FileNotFoundException e) {
             e.printStackTrace();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
         }
     }
 
@@ -38,15 +42,6 @@ public class DatabaseManager {
             instance=new DatabaseManager();
         }
         return instance;
-    }
-
-    private void configFromProperties(){
-        Properties properties = new Properties();
-        serverUrl= properties.getProperty("database.url","jdbc:sqlite");
-        serverPort = properties.getProperty("database.port","3306");
-        dataBaseName = properties.getProperty("database.name","Pokemon");
-        jdbcDriver = properties.getProperty("database.driver","org.sqlite.JDBC");
-        conURL =properties.getProperty("database.connectionUrl", serverUrl + ":"+dataBaseName+".db");
     }
 
     public Connection getConnection() throws SQLException {
@@ -69,12 +64,31 @@ public class DatabaseManager {
         connection.close();
     }
 
-    public void executeScript(String script, boolean logWriter) throws FileNotFoundException{
+        private void configFromProperties(){
+        try{
+        Properties properties = new Properties();
+        properties.load(DatabaseManager.class.getClassLoader().getResourceAsStream("config.properties"));
+
+        serverUrl= properties.getProperty("database.url","jdbc:sqlite");
+        dataBaseName = properties.getProperty("database.name","Pokemon");
+        chargeTables=Boolean.parseBoolean(properties.getProperty("database.initDatabase","false"));
+        conURL =properties.getProperty("database.connectionUrl", serverUrl + ":"+dataBaseName + ".db");
+        System.out.println(conURL);
+        initScript=properties.getProperty("database.initScript","init.sql");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    public void executeScript(String script, boolean logWriter) throws IOException, SQLException {
         ScriptRunner runner = new ScriptRunner(connection);
-        var file = ClassLoader.getSystemResource(script).getFile();
-        Reader reader = new BufferedReader(new FileReader(file));
-        runner.setLogWriter(logWriter ? new PrintWriter(System.out):null);
-        runner.runScript(reader);
+        InputStream inputStream = ClassLoader.getSystemResourceAsStream(script);
+        if (inputStream != null) {
+            InputStreamReader reader = new InputStreamReader(inputStream);
+            runner.setLogWriter(logWriter ? new PrintWriter(System.out) : null);
+            runner.runScript(reader);
+        } else {
+            throw new FileNotFoundException("Script not found: " + script);
+        }
     }
 
 

@@ -11,8 +11,4 @@ public interface CRUDRepository<T,ID> {
     Optional<T> findById(ID id) throws SQLException;;
 
     T save(T element) throws SQLException;
-
-    T remove(T element) throws SQLException;
-
-    T update(T element) throws SQLException;
 }

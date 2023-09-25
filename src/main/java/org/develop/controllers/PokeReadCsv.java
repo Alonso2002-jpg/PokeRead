@@ -29,19 +29,12 @@ public class PokeReadCsv {
                 pk.setHeight(line[3]);
                 pk.setWeight(line[4]);
                 pokedex.add(pk);
-                System.out.println(pk);
             }
         }catch (IOException e){
             e.printStackTrace();
         }catch (Exception e){
             e.printStackTrace();
         }
-
         return pokedex;
-    }
-
-    public static void main(String[] args) {
-        PokeReadCsv pkr = new PokeReadCsv();
-        pkr.leerCSV();
     }
 }

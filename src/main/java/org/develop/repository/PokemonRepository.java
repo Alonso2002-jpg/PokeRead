@@ -6,11 +6,6 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public interface PokemonRepository<T,ID> extends CRUDRepository<T,ID>{
-    void deleteAll() throws SQLException;
+    Pokemon findByName(String name) throws SQLException;
 
-    Pokemon findByName() throws SQLException;
-
-    void backup() throws SQLException, IOException;
-
-    void restore() throws SQLException, IOException;
 }
