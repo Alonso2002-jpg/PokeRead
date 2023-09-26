@@ -106,7 +106,7 @@ public class PokemonReposityImpl implements PokemonRepository<Pokemon,Integer>{
 
 
     @Override
-    public Pokemon findByName(String name) {
+    public Optional<Pokemon> findByName(String name) {
         logger.debug("Obtener Pokemon Con Nombre: " + name);
         String sqlQuery ="SELECT * FROM Pokemon WHERE name = ?";
         Pokemon pokemon = new Pokemon();
@@ -121,11 +121,13 @@ public class PokemonReposityImpl implements PokemonRepository<Pokemon,Integer>{
             pokemon.setWeight(rs.getString("weight"));
         }
         db.closeConnection();
+        return Optional.of(pokemon);
         }catch (SQLException e ){
             logger.error("Error al obtener Pokemon con Nombre: " + name);
             System.out.println(e.getMessage());
         }
-        return pokemon;
+
+        return Optional.empty();
     }
 
 }
