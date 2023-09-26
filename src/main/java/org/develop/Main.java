@@ -23,6 +23,9 @@ public class Main {
         Optional<Pokemon> pk = pkRepoImp.findById(20);
         System.out.println(pk.isPresent()?pk.get():"not found");
 
+        Optional<Pokemon> pk2 = pkRepoImp.findByName("Pikachu");
+        System.out.println(pk2.isPresent()?pk2.get():"not found");
+
 //        System.out.println("Obtener Pokemon por ID");
 //       Pokemon pokemon=pokemonController.getPokemonXId(25);
 //
@@ -35,11 +38,11 @@ public class Main {
 //       cincoUltimos.forEach(System.out::println);
 //
 //        System.out.println();
-//        Optional<Pokemon> pika = pokemonController.getPokemonXName("Pikacf");
+//        Optional<Pokemon> pika = pokemonController.getPokemonXName("Pikachu");
 //
 //        System.out.println(pika.get());
 //
-//        Optional<Pokemon> nextEvolution = pokemonController.getEvolution("Raichu");
+//        Optional<Pokemon> nextEvolution = pokemonController.getEvolution("Charmander");
 //        System.out.println(nextEvolution.orElse(new Pokemon()));
 //
 //        List<String> pokemonsXType=pokemonController.getPokeXType("Fire");
