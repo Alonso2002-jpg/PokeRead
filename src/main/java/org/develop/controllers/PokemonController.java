@@ -277,7 +277,6 @@ public class PokemonController {
 
     public Map<String, List<Pokemon>> getGroupType(){
 
-
         return obtenerPokemons()
                 .stream()
                 .flatMap(pk-> pk.getType().stream())
@@ -288,12 +287,16 @@ public class PokemonController {
                                         .toList()));
     }
 
-    public Map<String, Long> getGroupWeak(){
+    public Map<String, List<Pokemon>> getGroupWeak(){
         return obtenerPokemons()
                 .stream()
-                .map(Pokemon::getWeaknesses)
-                .flatMap(ArrayList::stream)
-                .collect(Collectors.groupingBy(pw -> pw, Collectors.counting()));
+                .flatMap(pk-> pk.getWeaknesses().stream())
+                .distinct()
+                .collect(Collectors
+                        .toMap(weak -> weak,
+                                weak -> obtenerPokemons().stream().filter(pk -> pk.getWeaknesses().contains(weak))
+                                        .toList()));
+
     }
 
     public Map<Integer, Long> getPokeXNumEvo(){
@@ -310,17 +313,26 @@ public class PokemonController {
 
     public String getMostCommonWeak(){
 
-        return getGroupWeak()
+        return obtenerPokemons()
+                .stream()
+                .flatMap(pk -> pk.getWeaknesses().stream())
+                .collect(Collectors.groupingBy(mp -> mp, Collectors.counting()))
                 .entrySet()
                 .stream()
-                .max(Comparator.comparingInt(m -> m.getValue().intValue()))
-                .get()
-                .getKey();
+                .sorted(Collections.reverseOrder(Comparator.comparingLong(Map.Entry::getValue)))
+                .map(Map.Entry::getKey)
+                .findFirst()
+                .orElse("NaN");
     }
+
     public static void main(String[] args) {
         var poke = PokemonController.getInstance();
-        poke.getGroupType().forEach((k,v) -> System.out.println(k + " : " + v));
-
+        //poke.getGroupWeak().forEach((k,v) -> System.out.println(k + " : " + v));
+        poke.obtenerPokemons().stream()
+                .flatMap(pk -> pk.getWeaknesses().stream())
+                .collect(Collectors.groupingBy(pk-> pk, Collectors.counting()))
+                        .forEach((a,b) -> System.out.println(a + " : " + b));
+        System.out.println("Weak mas frecuente: " + poke.getMostCommonWeak());
 
     }
 }

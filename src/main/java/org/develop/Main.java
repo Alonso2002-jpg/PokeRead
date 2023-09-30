@@ -1,6 +1,7 @@
 package org.develop;
 
 import org.develop.controllers.PokeReadCsv;
+import org.develop.controllers.PokemonController;
 import org.develop.model.Pokemon;
 import org.develop.repository.PokemonReposityImpl;
 import org.develop.services.DatabaseManager;
@@ -14,17 +15,18 @@ public class Main {
     public static void main(String[] args) throws SQLException {
         PokeReadCsv pokeReadCsv=new PokeReadCsv();
         DatabaseManager dbManager = DatabaseManager.getInstance();
+        PokemonController pokemonController = PokemonController.getInstance();
         PokemonReposityImpl pkRepoImp = PokemonReposityImpl.getInstance(dbManager);
         ArrayList<Pokemon> pokemons = pokeReadCsv.leerCSV();
 
-        pokemons.stream()
-                .forEach(poke -> pkRepoImp.save(poke));
-
-        Optional<Pokemon> pk = pkRepoImp.findById(20);
-        System.out.println(pk.isPresent()?pk.get():"not found");
-
-        Optional<Pokemon> pk2 = pkRepoImp.findByName("Pikachu");
-        System.out.println(pk2.isPresent()?pk2.get():"not found");
+//        pokemons.stream()
+//                .forEach(poke -> pkRepoImp.save(poke));
+//
+//        Optional<Pokemon> pk = pkRepoImp.findById(20);
+//        System.out.println(pk.isPresent()?pk.get():"not found");
+//
+//        Optional<Pokemon> pk2 = pkRepoImp.findByName("Pikachu");
+//        System.out.println(pk2.isPresent()?pk2.get():"not found");
 
 //        System.out.println("Obtener Pokemon por ID");
 //       Pokemon pokemon=pokemonController.getPokemonXId(25);
@@ -86,9 +88,9 @@ public class Main {
 //
 //        double mediaWeak = pokemonController.getAverageWeaks();
 //        System.out.println(mediaWeak);
-//        System.out.println("Tipos de pokemon");
-//        var groupType= pokemonController.getGroupType();
-//        groupType.forEach((k,v)-> System.out.println("Type " + k + ": " + v));
+        System.out.println("Tipos de pokemon");
+        var groupType= pokemonController.getGroupType();
+        groupType.forEach((k,v)-> System.out.println("Type " + k + ": " + v));
 //
 //        System.out.println("Debilidades de pokemon");
 //        var groupWeak=pokemonController.getGroupWeak();
