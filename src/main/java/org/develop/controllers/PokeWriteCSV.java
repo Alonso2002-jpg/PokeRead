@@ -11,8 +11,17 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Properties;
 
+/**
+ * La clase PokeWriteCSV se utiliza para escribir datos en un archivo CSV.
+ */
 public class PokeWriteCSV {
 
+    /**
+     * Escribe una lista de Pokémon en un archivo CSV especificado.
+     *
+     * @param pokedex   La lista de Pokémon que se va a escribir en el archivo CSV.
+     * @param filePath  La ruta al archivo CSV en el que se van a escribir los datos.
+     */
         public void writePokedexToCSV(List<Pokemon> pokedex, String filePath) {
         try (CSVWriter writer = new CSVWriter(new FileWriter(filePath))) {
             // Escribir el encabezado del CSV
@@ -34,6 +43,12 @@ public class PokeWriteCSV {
             e.printStackTrace();
         }
     }
+
+    /**
+     * Escribe la Pokedex actual en un archivo CSV en la ubicación predeterminada.
+     *
+     * @param pkController El controlador de Pokémon que contiene la Pokedex.
+     */
 
     public void escribirCSV(PokemonController pkController){
         Path rutaRelativa = Paths.get("");

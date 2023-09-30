@@ -5,7 +5,10 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.util.ArrayList;
-
+/** La clase Pokemon representa a una entidad que almacena información detallada sobre Pokémon,
+ *  incluyendo su identificación, nombre, tipo, características físicas, estadísticas y detalles evolutivos.
+ *  Tambien en esta clase le asignamos los getters and setters,ocultar los detalles internos de una clase y proporcionar
+ *  un control estructurado sobre cómo se accede y modifica su estado. */
 @Data
 
 public class Pokemon{
@@ -163,16 +166,35 @@ public class Pokemon{
  public void setPrev_evolution(ArrayList<PrevEvolution> prev_evolution) {
   this.prev_evolution = prev_evolution;
  }
-
+ /**
+  * Convierte el atributo de peso del Pokémon en formato String a un valor numérico.
+  *
+  * @return El peso del Pokémon en formato numérico (en kilogramos).
+  */
  public double parseWeight(){
    String medidas[]=weight.split(" ");
    return Double.parseDouble(medidas[0]);
  }
 
+ /**
+  * Convierte el atributo de altura del Pokémon en formato String a un valor numérico.
+  *
+  * @return La altura del Pokémon en formato numérico (en metros).
+  */
  public double parseHeight(){
    String medidas[]=height.split(" ");
    return Double.parseDouble(medidas[0]);
  }
+
+ /**
+  * Devuelve una representación en forma de cadena del objeto Pokemon.
+  * Esta representación incluye todos los atributos del Pokemon, como su ID, número,
+  * nombre, imagen, tipo, altura, peso, golosina, cantidad de golosina, huevo, probabilidad de aparición,
+  * promedio de apariciones, tiempo de aparición, multiplicadores, debilidades, evoluciones previas
+  * y evoluciones posteriores.
+  *
+  * @return Una cadena que representa de manera detallada el objeto Pokemon.
+  */
  @Override
     public String toString() {
         return "Pokemon{" +
