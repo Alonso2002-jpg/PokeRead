@@ -299,16 +299,12 @@ public class PokemonController {
 
     }
 
-    public Map<Integer, Long> getPokeXNumEvo(){
+    public Map<Integer, List<Pokemon>> getPokeXNumEvo(){
 
 
         return obtenerPokemons()
                 .stream()
-                .filter(pk -> pk.getNext_evolution() != null)
-                .collect(Collectors.groupingBy(pk -> pk.getNext_evolution().size(),Collectors.counting()))
-                .entrySet()
-                .stream()
-                .collect( Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                .collect(Collectors.groupingBy(pk -> pk.getNext_evolution()!=null ? pk.getNext_evolution().size() : 0));
     }
 
     public String getMostCommonWeak(){
@@ -324,6 +320,7 @@ public class PokemonController {
                 .findFirst()
                 .orElse("NaN");
     }
+
 
     public static void main(String[] args) {
         var poke = PokemonController.getInstance();
