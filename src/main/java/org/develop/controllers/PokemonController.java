@@ -465,11 +465,7 @@ public class PokemonController {
 
         return obtenerPokemons()
                 .stream()
-                .filter(pk -> pk.getNext_evolution() != null)
-                .collect(Collectors.groupingBy(pk -> pk.getNext_evolution().size(),Collectors.counting()))
-                .entrySet()
-                .stream()
-                .collect( Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+                .collect(Collectors.groupingBy(pk -> pk.getNext_evolution()!=null ? pk.getNext_evolution().size() : 0));
     }
 
     /**
