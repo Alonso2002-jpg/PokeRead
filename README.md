@@ -1,4 +1,4 @@
-# Proyecto Pekemon - Java con SQLite
+# Proyecto Pokemon - Java con SQLite
 ***
 Este proyecto es una aplicación simple en Java que utiliza SQLite como base de datos. A continuación, se describen los pasos para configurar y ejecutar el proyecto.
 ## Requisitos
