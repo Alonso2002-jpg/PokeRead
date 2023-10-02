@@ -3,9 +3,9 @@ package org.develop.model;
 import lombok.Data;
 
 /**
- * La clase NextEvolution representa la información sobre la siguiente evolución de un Pokémon.
- * Cada instancia de esta clase contiene detalles sobre el número de la evolución y el nombre
- * de la evolución y le aplicamos los getters and setters.
+ * La clase NextEvolution representa la informacion sobre la siguiente evolucion de un Pokemon.
+ * Cada instancia de esta clase contiene detalles sobre el numero de la evolucion y el nombre
+ * de la evolucion y le aplicamos los getters and setters.
  */
 @Data
 public class NextEvolution{

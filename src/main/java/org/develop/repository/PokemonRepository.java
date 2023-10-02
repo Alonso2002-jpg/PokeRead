@@ -7,19 +7,19 @@ import java.sql.SQLException;
 import java.util.Optional;
 
 /**
- * La interfaz PokemonRepository proporciona métodos para acceder y manipular datos de Pokémon en un repositorio.
+ * La interfaz PokemonRepository proporciona metodos para acceder y manipular datos de Pokemon en un repositorio.
  *
- * @param <T> El tipo de entidad Pokémon.
- * @param <ID> El tipo de identificador para las entidades Pokémon.
+ * @param <T> El tipo de entidad Pokemon.
+ * @param <ID> El tipo de identificador para las entidades Pokemon.
  */
 
 public interface PokemonRepository<T,ID> extends CRUDRepository<T,ID>{
 
     /**
-     * Busca un Pokémon por su nombre en el repositorio.
+     * Busca un Pokemon por su nombre en el repositorio.
      *
-     * @param name El nombre del Pokémon que se desea buscar.
-     * @return Un objeto Optional que contiene el Pokémon encontrado por nombre, o un Optional vacío si no se encuentra ningún Pokémon con ese nombre.
+     * @param name El nombre del Pokemon que se desea buscar.
+     * @return Un objeto Optional que contiene el Pokemon encontrado por nombre, o un Optional vacio si no se encuentra ningun Pokemon con ese nombre.
      * @throws SQLException Si ocurre un error al acceder a la base de datos.
      */
     Optional<Pokemon> findByName(String name) throws SQLException;

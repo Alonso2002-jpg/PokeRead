@@ -12,7 +12,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * La clase PokemonRepositoryImpl implementa la interfaz PokemonRepository para acceder y manipular datos de Pokemon en una base de datos.
+ */
 public class PokemonReposityImpl implements PokemonRepository<Pokemon,Integer>{
 
     private static PokemonReposityImpl instance;
@@ -25,6 +27,13 @@ public class PokemonReposityImpl implements PokemonRepository<Pokemon,Integer>{
         this.db = db;
     }
 
+    /**
+     * Obtiene una instancia de PokemonRepositoryImpl.
+     *
+     * @param db El administrador de la base de datos utilizado para acceder a los datos de Pokemon.
+     * @return Una instancia de PokemonRepositoryImpl.
+     */
+
     public static PokemonReposityImpl getInstance(DatabaseManager db) {
         if (instance == null) {
             instance = new PokemonReposityImpl(db);
@@ -33,6 +42,12 @@ public class PokemonReposityImpl implements PokemonRepository<Pokemon,Integer>{
         return instance;
     }
 
+    /**
+     * Guarda un Pokemon en la base de datos.
+     *
+     * @param pokemon El Pokemon que se desea guardar en la base de datos.
+     * @return El Pokemon que se ha guardado en la base de datos.
+     */
        @Override
     public Pokemon save(Pokemon pokemon) {
        String sqlQuery ="INSERT INTO Pokemon (id,num ,name, height, weight) VALUES (?,?,?,?,?)";
@@ -51,6 +66,12 @@ public class PokemonReposityImpl implements PokemonRepository<Pokemon,Integer>{
         return pokemon;
     }
 
+    /**
+     * Obtiene una lista de todos los Pokemon en la base de datos.
+     *
+     * @return Una lista de objetos Pokemon que representan todos los Pokemon en la base de datos.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     @Override
     public List<Pokemon> findAll() throws SQLException {
         logger.debug("Obteniendo todos los Pokemon");
@@ -75,6 +96,13 @@ public class PokemonReposityImpl implements PokemonRepository<Pokemon,Integer>{
         return pokedex;
     }
 
+    /**
+     * Busca un Pokemon en la base de datos por su ID.
+     *
+     * @param id El ID del Pokemon que se desea buscar.
+     * @return Un objeto Optional que contiene el Pokemon si se encuentra en la base de datos, o un Optional vacio si no se encuentra.
+     * @throws SQLException Si ocurre un error al acceder a la base de datos.
+     */
     @Override
     public Optional<Pokemon> findById(Integer id) throws SQLException {
         logger.debug("Obtener Pokemon con ID: " + id);
@@ -105,6 +133,12 @@ public class PokemonReposityImpl implements PokemonRepository<Pokemon,Integer>{
     }
 
 
+    /**
+     * Busca un Pokemon en la base de datos por su nombre.
+     *
+     * @param name El nombre del Pokemon que se desea buscar.
+     * @return Un objeto Optional que contiene el Pokemon si se encuentra en la base de datos, o un Optional vacio si no se encuentra.
+     */
     @Override
     public Optional<Pokemon> findByName(String name) {
         logger.debug("Obtener Pokemon Con Nombre: " + name);

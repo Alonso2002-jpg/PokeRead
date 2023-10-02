@@ -1,4 +1,4 @@
-/*Esta sentencia SQL crea una tabla llamada "Pokemon" para almacenar información sobre Pokémon,
+/**Esta sentencia SQL crea una tabla llamada "Pokemon" para almacenar información sobre Pokémon,
   *La tabla tiene las siguientes columnas:
   *id: Identificador único de Pokémon.
   *num: Número de Pokémon.

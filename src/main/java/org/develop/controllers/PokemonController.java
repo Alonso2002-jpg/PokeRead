@@ -7,7 +7,6 @@ import org.develop.model.NextEvolution;
 import org.develop.model.Pokedex;
 import org.develop.model.Pokemon;
 
-import java.awt.*;
 import java.io.File;
 import java.io.Reader;
 import java.nio.file.Files;
@@ -18,8 +17,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.DoubleStream;
 /**
- * La clase PokemonController es un controlador que gestiona la interacción con la Pokedex de Pokémon.
- * Es responsable de cargar la Pokedex y proporcionar acceso a ella a través de su instancia única.
+ * La clase PokemonController es un controlador que gestiona la interaccion con la Pokedex de Pokemon.
+ * Es responsable de cargar la Pokedex y proporcionar acceso a ella a traves de su instancia unica.
  */
 public class PokemonController {
     private static PokemonController instance;
@@ -34,10 +33,10 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene la instancia única de PokemonController (patrón Singleton).
+     * Obtiene la instancia unica de PokemonController (patron Singleton).
      * Si no existe una instancia previa, crea una nueva.
      *
-     * @return La instancia única de PokemonController.
+     * @return La instancia unica de PokemonController.
      */
     public static PokemonController getInstance() {
         if (instance == null) {
@@ -48,15 +47,15 @@ public class PokemonController {
 
     /**
      * Cierra la instancia única de PokemonController.
-     * Este método establece la instancia en null, lo que permite que se cree una nueva instancia.
+     * Este metodo establece la instancia en null, lo que permite que se cree una nueva instancia.
      */
     public static void closeInstance() {
         instance=null;
     }
 
     /**
-     * Carga la Pokedex de Pokémon desde un archivo JSON en el sistema de archivos.
-     * Utiliza la biblioteca Gson para realizar la conversión de JSON a objetos Java.
+     * Carga la Pokedex de Pokemon desde un archivo JSON en el sistema de archivos.
+     * Utiliza la biblioteca Gson para realizar la conversion de JSON a objetos Java.
      * La Pokedex cargada se almacena en la instancia actual de PokemonController.
      */
     public void cargarPokedex() {
@@ -78,18 +77,18 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene la lista de Pokémon almacenados en la Pokedex.
+     * Obtiene la lista de Pokemon almacenados en la Pokedex.
      *
-     * @return Una lista de objetos Pokemon que representa a todos los Pokémon en la Pokedex.
+     * @return Una lista de objetos Pokemon que representa a todos los Pokemon en la Pokedex.
      */
     public ArrayList<Pokemon> obtenerPokemons(){
         return this.pokedex.pokemon;
     }
 
     /**
-     * Obtiene un Pokémon específico por su ID.
+     * Obtiene un Pokemon especifico por su ID.
      *
-     * @param id El ID del Pokémon que se desea obtener.
+     * @param id El ID del Pokemon que se desea obtener.
      * @return El objeto Pokemon correspondiente al ID proporcionado, o null si no se encuentra.
      */
 
@@ -98,9 +97,9 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene una lista de los nombres de los 10 primeros Pokémon en la Pokedex.
+     * Obtiene una lista de los nombres de los 10 primeros Pokemon en la Pokedex.
      *
-     * @return Una lista de nombres de los 10 primeros Pokémon.
+     * @return Una lista de nombres de los 10 primeros Pokemon.
      */
     public List<String> obtenerNom10Primeros(){
         List<String> list = obtenerPokemons()
@@ -113,9 +112,9 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene una lista de los nombres de los últimos 5 Pokémon en la Pokedex.
+     * Obtiene una lista de los nombres de los ultimos 5 Pokemon en la Pokedex.
      *
-     * @return Una lista de nombres de los últimos 5 Pokémon.
+     * @return Una lista de nombres de los ultimos 5 Pokemon.
      */
     public List<String> obtenerNom5Ultimos(){
          List<String> list = obtenerPokemons()
@@ -128,11 +127,11 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene un Pokémon por su nombre, ignorando mayúsculas y minúsculas.
+     * Obtiene un Pokemon por su nombre, ignorando mayusculas y minusculas.
      *
-     * @param name El nombre del Pokémon que se desea obtener.
-     * @return Un objeto Optional que contiene el Pokémon correspondiente al nombre proporcionado,
-     *         o un Optional vacío si no se encuentra un Pokémon con ese nombre.
+     * @param name El nombre del Pokemon que se desea obtener.
+     * @return Un objeto Optional que contiene el Pokemon correspondiente al nombre proporcionado,
+     *         o un Optional vacio si no se encuentra un Pokemon con ese nombre.
      */
     public Optional<Pokemon> getPokemonXName(String name){
         Optional<Pokemon> pokemon = obtenerPokemons()
@@ -144,11 +143,11 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene la evolución de un Pokémon por su nombre.
+     * Obtiene la evolucion de un Pokemon por su nombre.
      *
-     * @param name El nombre del Pokémon del que se desea obtener la evolución.
-     * @return Un objeto Optional que contiene la evolución del Pokémon correspondiente al nombre proporcionado,
-     *         o un Optional vacío si el Pokémon no tiene una evolución registrada.
+     * @param name El nombre del Pokemon del que se desea obtener la evolucion.
+     * @return Un objeto Optional que contiene la evolucion del Pokemon correspondiente al nombre proporcionado,
+     *         o un Optional vacio si el Pokemon no tiene una evolucion registrada.
      */
     public Optional<Pokemon> getEvolution(String name){
         Optional<NextEvolution> nextEvolution =
@@ -163,11 +162,11 @@ public class PokemonController {
         }
 
         /**
-         * Obtiene un Pokémon que representa la evolución del Pokémon especificado por su nombre.
+         * Obtiene un Pokemon que representa la evolucion del Pokemon especificado por su nombre.
          *
-         * @param nextEvolutionName El nombre del Pokémon del que se desea obtener la evolución.
-         * @return Un objeto Optional que contiene el Pokémon que representa la evolución del Pokémon especificado,
-         *         o un Optional vacío si no se encuentra la evolución correspondiente.
+         * @param nextEvolutionName El nombre del Pokemon del que se desea obtener la evolucion.
+         * @return Un objeto Optional que contiene el Pokemon que representa la evolucion del Pokemon especificado,
+         *         o un Optional vacio si no se encuentra la evolucion correspondiente.
          */
         Optional<Pokemon> EvPokemon = obtenerPokemons()
                 .stream()
@@ -178,10 +177,10 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene una lista de nombres de Pokémon que pertenecen al tipo especificado.
+     * Obtiene una lista de nombres de Pokemon que pertenecen al tipo especificado.
      *
-     * @param type El tipo de Pokémon que se desea buscar.
-     * @return Una lista de nombres de Pokémon que pertenecen al tipo especificado.
+     * @param type El tipo de Pokemon que se desea buscar.
+     * @return Una lista de nombres de Pokemon que pertenecen al tipo especificado.
      */
 
     public List<String> getPokeXType(String type){
@@ -196,9 +195,9 @@ public class PokemonController {
 
 
     /**
-     * Obtiene una lista de nombres de Pokémon que tienen debilidades frente a "Water" o "Electric".
+     * Obtiene una lista de nombres de Pokemon que tienen debilidades frente a "Water" o "Electric".
      *
-     * @return Una lista de nombres de Pokémon con debilidades frente a "Water" o "Electric".
+     * @return Una lista de nombres de Pokemon con debilidades frente a "Water" o "Electric".
      */
     public List<String> getWeakPokeWatElec(){
         List<String> weakPoke = obtenerPokemons()
@@ -211,9 +210,9 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene la cantidad de Pokémon que tienen exactamente una debilidad.
+     * Obtiene la cantidad de Pokemon que tienen exactamente una debilidad.
      *
-     * @return El número de Pokémon que tienen una sola debilidad.
+     * @return El numero de Pokemon que tienen una sola debilidad.
      */
     public long getCountOfWeak(){
         long count = obtenerPokemons()
@@ -225,10 +224,10 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene el Pokémon con la mayor cantidad de debilidades.
+     * Obtiene el Pokemon con la mayor cantidad de debilidades.
      *
-     * @return Un objeto Optional que contiene el Pokémon con la mayor cantidad de debilidades,
-     *         o un Optional vacío si no se encuentra ningún Pokémon.
+     * @return Un objeto Optional que contiene el Pokemon con la mayor cantidad de debilidades,
+     *         o un Optional vacio si no se encuentra ningun Pokemon.
      */
 
     public Optional<Pokemon> maxWeakPokemon(){
@@ -243,10 +242,10 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene el Pokémon con la menor cantidad de evoluciones.
+     * Obtiene el Pokemon con la menor cantidad de evoluciones.
      *
-     * @return Un objeto Optional que contiene el Pokémon con la menor cantidad de evoluciones,
-     *         o un Optional vacío si no se encuentra ningún Pokémon con evoluciones.
+     * @return Un objeto Optional que contiene el Pokemon con la menor cantidad de evoluciones,
+     *         o un Optional vacio si no se encuentra ningun Pokemon con evoluciones.
      */
      public Optional<Pokemon> minEvoPokemon(){
         Optional<Pokemon> countEvo = obtenerPokemons()
@@ -261,11 +260,11 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene un Pokémon que no evoluciona a un Pokémon del tipo especificado.
+     * Obtiene un Pokemon que no evoluciona a un Pokemon del tipo especificado.
      *
-     * @param type El tipo de Pokémon que se desea evitar en las evoluciones.
-     * @return Un objeto Optional que contiene un Pokémon que no evoluciona a un Pokémon del tipo especificado,
-     *         o un Optional vacío si no se encuentra ningún Pokémon que cumpla con esta condición.
+     * @param type El tipo de Pokemon que se desea evitar en las evoluciones.
+     * @return Un objeto Optional que contiene un Pokemon que no evoluciona a un Pokemon del tipo especificado,
+     *         o un Optional vacio si no se encuentra ningun Pokemon que cumpla con esta condicion.
      */
     public Optional<Pokemon> getPokeNotEvoType(String type){
         List<NextEvolution> evoNotType = obtenerPokemons()
@@ -288,10 +287,10 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene el Pokémon con el mayor peso.
+     * Obtiene el Pokemon con el mayor peso.
      *
-     * @return Un objeto Optional que contiene el Pokémon con el mayor peso,
-     *         o un Optional vacío si no se encuentra ningún Pokémon.
+     * @return Un objeto Optional que contiene el Pokemon con el mayor peso,
+     *         o un Optional vacio si no se encuentra ningun Pokemon.
      */
 
     public Optional<Pokemon> getPokeMaxWeight(){
@@ -313,10 +312,10 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene el Pokémon con la mayor altura.
+     * Obtiene el Pokemon con la mayor altura.
      *
-     * @return Un objeto Optional que contiene el Pokémon con la mayor altura,
-     *         o un Optional vacío si no se encuentra ningún Pokémon.
+     * @return Un objeto Optional que contiene el Pokemon con la mayor altura,
+     *         o un Optional vacio si no se encuentra ningun Pokemon.
      */
     public Optional<Pokemon> getPokeMaxHeight(){
         // Encuentra el valor máximo de altura utilizando la función de mapeo y luego busca el Pokémon correspondiente.
@@ -338,10 +337,10 @@ public class PokemonController {
 
 
     /**
-     * Obtiene el Pokémon cuyo nombre tiene la longitud máxima.
+     * Obtiene el Pokemon cuyo nombre tiene la longitud maxima.
      *
-     * @return Un objeto Optional que contiene el Pokémon cuyo nombre tiene la longitud máxima,
-     *         o un Optional vacío si no se encuentra ningún Pokémon.
+     * @return Un objeto Optional que contiene el Pokemon cuyo nombre tiene la longitud maxima,
+     *         o un Optional vacio si no se encuentra ningun Pokemon.
      */
     public Optional<Pokemon> getPokemonLength(){
         var maxLength = obtenerPokemons()
@@ -365,16 +364,16 @@ public class PokemonController {
      * Calcula el promedio de un flujo de valores de tipo Double.
      *
      * @param stream El flujo de valores Double para el cual se desea calcular el promedio.
-     * @return El promedio de los valores en el flujo como un número de punto flotante.
+     * @return El promedio de los valores en el flujo como un numero de punto flotante.
      */
     public double getAverage(DoubleStream stream){
         return stream.average().getAsDouble();
     }
 
      /**
-      * Obtiene el promedio de peso de todos los Pokémon en la Pokedex.
+      * Obtiene el promedio de peso de todos los Pokemon en la Pokedex.
       *
-      * @return El promedio de peso de todos los Pokémon como un número de punto flotante.
+      * @return El promedio de peso de todos los Pokemon como un numero de punto flotante.
       */
     public double getAverageWeight(){
         var averageWeight = obtenerPokemons()
@@ -385,9 +384,9 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene el promedio de altura de todos los Pokémon en la Pokedex.
+     * Obtiene el promedio de altura de todos los Pokemon en la Pokedex.
      *
-     * @return El promedio de altura de todos los Pokémon como un número de punto flotante.
+     * @return El promedio de altura de todos los Pokemon como un numero de punto flotante.
      */
     public double getAverageHeight(){
         var averageHeight = obtenerPokemons()
@@ -398,9 +397,9 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene el promedio de la cantidad de evoluciones de los Pokémon en la Pokedex.
+     * Obtiene el promedio de la cantidad de evoluciones de los Pokemon en la Pokedex.
      *
-     * @return El promedio de la cantidad de evoluciones de los Pokémon como un número de punto flotante.
+     * @return El promedio de la cantidad de evoluciones de los Pokemon como un numero de punto flotante.
      */
     public double getAverageEvolutions(){
         var averageEvolutions = obtenerPokemons()
@@ -413,9 +412,9 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene el promedio de la cantidad de tipos a los que pertenecen los Pokémon en la Pokedex.
+     * Obtiene el promedio de la cantidad de tipos a los que pertenecen los Pokemon en la Pokedex.
      *
-     * @return El promedio de la cantidad de tipos a los que pertenecen los Pokémon como un número de punto flotante.
+     * @return El promedio de la cantidad de tipos a los que pertenecen los Pokemon como un numero de punto flotante.
      */
     public double getAverageWeaks(){
         var averageWeaks = obtenerPokemons()
@@ -427,9 +426,9 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene un mapa que agrupa los Pokémon por tipo.
+     * Obtiene un mapa que agrupa los Pokemon por tipo.
      *
-     * @return Un mapa donde las claves son los tipos y los valores son listas de Pokémon que pertenecen a ese tipo.
+     * @return Un mapa donde las claves son los tipos y los valores son listas de Pokemon que pertenecen a ese tipo.
      */
     public Map<String, List<Pokemon>> getGroupType(){
 
@@ -443,7 +442,7 @@ public class PokemonController {
                                         .toList()));
     }
 
-    public Map<String, Long> getGroupWeak(){
+    public Map<String, List<Pokemon>> getGroupWeak(){
         return obtenerPokemons()
                 .stream()
                 .flatMap(pk-> pk.getWeaknesses().stream())
@@ -456,9 +455,9 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene un mapa que agrupa los Pokémon por la cantidad de evoluciones que tienen.
+     * Obtiene un mapa que agrupa los Pokemon por la cantidad de evoluciones que tienen.
      *
-     * @return Un mapa donde las claves son la cantidad de evoluciones y los valores son la cantidad de Pokémon que tienen esa cantidad de evoluciones.
+     * @return Un mapa donde las claves son la cantidad de evoluciones y los valores son la cantidad de Pokemon que tienen esa cantidad de evoluciones.
      */
     public Map<Integer, Long> getPokeXNumEvo(){
 
@@ -469,9 +468,9 @@ public class PokemonController {
     }
 
     /**
-     * Obtiene el tipo de debilidad más común entre los Pokémon.
+     * Obtiene la debilidad mas común entre todos los Pokemon en la Pokedex.
      *
-     * @return El tipo de debilidad más común entre los Pokémon.
+     * @return La debilidad mas comun como una cadena de texto, o "NaN" si no se encuentra ninguna debilidad comun.
      */
     public String getMostCommonWeak(){
 
@@ -486,6 +485,11 @@ public class PokemonController {
                 .findFirst()
                 .orElse("NaN");
     }
+
+    /**
+     * El metodo principal del programa. Realiza operaciones relacionadas con las debilidades de los Pokemon
+     * y muestra la debilidad mas comun entre ellos.
+     */
     public static void main(String[] args) {
         var poke = PokemonController.getInstance();
         //poke.getGroupWeak().forEach((k,v) -> System.out.println(k + " : " + v));

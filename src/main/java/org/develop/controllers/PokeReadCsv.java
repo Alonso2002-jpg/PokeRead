@@ -10,15 +10,15 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 /**
- * La clase PokeReadCsv se utiliza para leer datos desde un archivo CSV y crear una lista de Pokémon.
+ * La clase PokeReadCsv se utiliza para leer datos desde un archivo CSV y crear una lista de Pokemon.
  */
 public class PokeReadCsv {
     String path;  //Ruta al archivo CSV
 
     /**
-     * Lee datos desde un archivo CSV y crea una lista de Pokémon a partir de los datos leídos.
+     * Lee datos desde un archivo CSV y crea una lista de Pokemon a partir de los datos leidos.
      *
-     * @return Una lista de Pokémon creada a partir de los datos del archivo CSV.
+     * @return Una lista de Pokemon creada a partir de los datos del archivo CSV.
      */
     public ArrayList<Pokemon> leerCSV(){
         ArrayList<Pokemon> pokedex = new ArrayList<Pokemon>();
